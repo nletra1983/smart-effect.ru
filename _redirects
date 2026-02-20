@@ -1,0 +1,5 @@
+# Redirects для GitHub Pages и других статических хостингов
+# Формат: from_path    to_path    [status]
+
+# Fallback
+/*                 /index.html              200

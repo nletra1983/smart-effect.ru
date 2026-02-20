@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Smart Speaker Conf — уникальная конференция для IT-лидеров и экспертов. Итоги и материалы.">
+    <title>Smart Speaker Conf — итоги конференции | Smart Effect</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Conference Title Section */
+        .conference-title-section {
+            width: 100%;
+            padding: 40px 0 20px 0;
+            background: var(--bg-white);
+            text-align: center;
+        }
+        
+        .conference-title-section h1 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin: 0 0 1rem 0;
+        }
+        
+        .conference-title-section p {
+            color: var(--text-light);
+            font-size: 1.2rem;
+            margin: 0;
+            font-style: italic;
+        }
+        
+        /* Video Section */
+        .conference-video {
+            width: 100%;
+            padding: 20px 0 40px 0;
+            margin: 0;
+            background: var(--bg-white);
+        }
+        
+        .conference-video .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 60px;
+        }
+        
+        .video-banner {
+            width: 100%;
+            background: #1a1a1a;
+            color: white;
+            padding: 0 0 40px 0;
+        }
+        
+        .video-banner .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 60px;
+        }
+        
+        .video-banner p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2rem;
+            margin: 0;
+            text-align: left;
+        }
+        
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+        }
+        
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        /* Photo Gallery Slider */
+        .photo-gallery {
+            padding: 60px 0;
+            background: var(--bg-light);
+            overflow: hidden;
+        }
+        
+        .photo-gallery .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 60px;
+        }
+        
+        .photo-slider-wrapper {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+        
+        .photo-slider {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s ease-in-out;
+        }
+        
+        .photo-slide {
+            min-width: 100%;
+            width: 100%;
+            height: 100%;
+            flex-shrink: 0;
+        }
+        
+        .photo-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .photo-slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .photo-slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--border-color);
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .photo-slider-dot.active {
+            background: var(--primary-color);
+        }
+        
+        .photo-slider-dot:hover {
+            background: var(--secondary-color);
+        }
+        
+        /* Reviews Slider */
+        .reviews-slider-section {
+            padding: var(--section-padding-sm) 0;  /* Уменьшено с 80px до 60px */
+            background: var(--bg-white);
+        }
+        
+        .reviews-slider {
+            position: relative;
+            max-width: 900px;
+            margin: 40px auto 0;
+            min-height: 450px;
+            height: 450px;
+        }
+        
+        .review-slide {
+            display: none;
+            padding: 40px;
+            background: var(--bg-light);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            overflow-y: auto;
+        }
+        
+        .review-slide.active {
+            display: block;
+        }
+        
+        .review-slide-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .review-slide-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .review-slide-info h4 {
+            margin: 0 0 5px 0;
+            color: var(--primary-color);
+        }
+        
+        .review-slide-info p {
+            margin: 0;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        
+        .review-slide-text {
+            color: var(--text-dark);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+        
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+            padding-top: 20px;
+        }
+        
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--border-color);
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .slider-dot.active {
+            background: var(--primary-color);
+        }
+        
+        .slider-dot:hover {
+            background: var(--secondary-color);
+        }
+        
+        /* Speakers Section */
+        .speakers-section {
+            padding: var(--section-padding-sm) 0;  /* Уменьшено с 80px до 60px */
+            background: var(--bg-white);
+        }
+        
+        .speakers-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 50px;
+        }
+        
+        .speakers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: var(--spacing-lg);  /* Уменьшено с 40px до 24px */
+        }
+        
+        .speaker-card {
+            text-align: center;
+            padding: 20px;
+            border-radius: 12px;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .speaker-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .speaker-card a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: inherit;
+            width: 100%;
+        }
+        
+        .speaker-photo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 20px;
+            display: block;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .speaker-card:hover .speaker-photo {
+            transform: scale(1.05);
+        }
+        
+        .speaker-name {
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .speaker-topic {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            text-align: center;
+        }
+        
+        .program-card {
+            scroll-margin-top: 80px;
+        }
+        
+        /* Concept Blocks Section */
+        .concept-blocks-section {
+            padding: 40px 0;
+            background: var(--bg-white);
+        }
+        
+        .concept-blocks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+        
+        .concept-block {
+            background: var(--bg-light);
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            transition: var(--transition);
+        }
+        
+        .concept-block:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .concept-block-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .concept-block-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        
+        .concept-block-title {
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .concept-block-description {
+            color: var(--text-dark);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+        
+        /* Target Audience Blocks */
+        .target-audience-blocks {
+            padding: 30px 0;
+            background: var(--bg-white);
+        }
+        
+        .target-audience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+        
+        .target-audience-block {
+            background: var(--bg-light);
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            transition: var(--transition);
+        }
+        
+        .target-audience-block:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .target-audience-block-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .target-audience-block-title {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .target-audience-block-description {
+            color: var(--text-dark);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+        
+        /* Program Section */
+        .program-section {
+            padding: var(--section-padding-sm) 0;  /* Уменьшено с 80px до 60px */
+            background: var(--bg-light);
+        }
+        
+        .program-card {
+            background: var(--bg-white);
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+            width: 100%;
+        }
+        
+        .program-card-header {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .program-speaker-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+        
+        .program-speaker-info {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .program-speaker-name {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .program-speaker-bio {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .program-speaker-bio ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        
+        .program-speaker-bio li {
+            margin-bottom: 5px;
+        }
+        
+        .program-topic {
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .program-description {
+            color: var(--text-dark);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        .program-presentation {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .program-presentation a {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .program-presentation a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .program-links {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            font-size: 0.95rem;
+        }
+        
+        .program-links a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .program-links a:hover {
+            color: var(--secondary-color);
+            text-decoration: underline;
+        }
+        
+        .program-links span {
+            color: var(--text-light);
+            margin: 0 5px;
+        }
+        
+        .for-whom-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 0;
+        }
+        
+        /* Override conference-content padding for this page */
+        .conference-content {
+            padding: 30px 0 !important;
+        }
+        
+        .conference-section {
+            margin-bottom: 20px !important;
+        }
+        
+        .smart-format-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: var(--spacing-lg);  /* Уменьшено с 40px до 24px */
+        }
+        
+        @media (max-width: 768px) {
+            .reviews-slider {
+                min-height: 500px;
+                height: 500px;
+            }
+            
+            .conference-video .container,
+            .photo-gallery .container {
+                padding: 0 20px;
+            }
+            
+            .photo-slider-wrapper {
+                height: 300px;
+            }
+            
+            .speakers-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .program-card {
+                padding: 25px;
+            }
+            
+            .program-card-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .program-speaker-photo {
+                margin: 0 auto;
+            }
+            
+            .for-whom-grid,
+            .smart-format-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .concept-blocks-grid,
+            .target-audience-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .conference-title-section h1 {
+                font-size: 2rem;
+            }
+            
+            .video-banner p {
+                font-size: 1rem;
+            }
+            
+            .conference-video .container,
+            .video-banner .container {
+                padding: 0 20px;
+            }
+        }
+        
+    </style>
+</head>
+<body>
+    <!-- Header - Loaded dynamically via menu.js -->
+    <header class="header"></header>
+
+    <!-- Conference Title Section -->
+    <section class="conference-title-section">
+        <div class="container">
+            <h1>Smart Speaker Conf</h1>
+            <p>конференция для лидеров нового времени</p>
+        </div>
+    </section>
+
+    <!-- Video Section -->
+    <section class="conference-video">
+        <div class="container">
+            <div class="video-wrapper">
+                <iframe 
+                    src="https://rutube.ru/play/embed/da059ae00f8ffb8dd0bab7a69725f831" 
+                    title="Smart Speaker Conf" 
+                    frameborder="0" 
+                    allow="clipboard-write; autoplay" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- For Whom Section -->
+    <section class="conference-content">
+        <div class="container">
+            <div class="conference-main">
+                <div class="conference-section">
+                    <div class="for-whom-grid">
+                        <div>
+                            <h3>Вам тоже будет интересно, если вы:</h3>
+                            <ol style="line-height: 2;">
+                                <li>Ищете способы стать эффективнее и результативнее</li>
+                                <li>Знакомы с ощущениями "тупика", "потолка" или "белки в колесе" на пути своего развития</li>
+                                <li>Периодически задаетесь вопросом: куда развиваться дальше?</li>
+                                <li>Стремитесь к самореализации и собственной целостности</li>
+                                <li>Ищете смыслы, переоцениваете ценности, переопределяете цели - не только в профессии, но и в жизни вообще</li>
+                                <li>Понимаете ценность баланса и гармонии в совокупности разных сторон жизни</li>
+                            </ol>
+                        </div>
+                        <div>
+                            <h3>Тематики докладов</h3>
+                            <p>Темы докладов в большинстве своем актуальны для айти-специалистов, независимо от роли и домена:</p>
+                            <ul style="line-height: 2;">
+                                <li>Лидерство в IT</li>
+                                <li>Кросс-ролевые софт-скиллы</li>
+                                <li>Профессиональная самореализация</li>
+                                <li>Работа и карьера в разрезе полноты жизни</li>
+                                <li>Выход на новый уровень мышления</li>
+                                <li>Использование проф. инструментов в жизни</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Target Audience Blocks -->
+    <section class="target-audience-blocks">
+        <div class="container">
+            <div class="target-audience-grid">
+                <div class="target-audience-block">
+                    <img src="https://fs-thb02.getcourse.ru/fileservice/file/thumbnail/h/f610557e8ed3bb3faf3ecdc06887f4c5.jpg/s/500x/a/603637/sc/348" alt="Выгорание" class="target-audience-block-image">
+                    <h3 class="target-audience-block-title">...кто пробовал, и больше не хочет выгорать</h3>
+                    <p class="target-audience-block-description">Вы знаете по опыту, как захватывающие вызовы постепенно превращаются в рутину, ведут к демотивации и выгоранию. И новый круг с тем же результатом вам уже не интересен</p>
+                </div>
+                <div class="target-audience-block">
+                    <img src="https://fs-thb03.getcourse.ru/fileservice/file/thumbnail/h/a88a27a68ab5d68d20232436eafd3009.jpg/s/500x/a/603637/sc/138" alt="Потолок достигаторов" class="target-audience-block-image">
+                    <h3 class="target-audience-block-title">...кому пора пробить потолок достигаторов</h3>
+                    <p class="target-audience-block-description">Вы умеете быть топ-перформером. Но уже ощутили стеклянный потолок возможностей достигаторов. Вы ищете способ выйти на новый уровень. Вы знаете, что он есть</p>
+                </div>
+                <div class="target-audience-block">
+                    <img src="https://fs-thb02.getcourse.ru/fileservice/file/thumbnail/h/481100d6451ed08af6f4008bd7a9b505.jpg/s/500x/a/603637/sc/85" alt="Рациональность" class="target-audience-block-image">
+                    <h3 class="target-audience-block-title">...кто знает обратную сторону рациональности</h3>
+                    <p class="target-audience-block-description">Вы испытали на себе обратную сторону рациональности, отказа от всего ради великих целей проекта. Но вам интересна полная жизнь, включающая все ее многообразие</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Slider -->
+    <section class="reviews-slider-section">
+        <div class="container">
+            <h2 class="section-title text-center">Отзывы участников</h2>
+            <div class="reviews-slider">
+                <div class="review-slide active">
+                    <div class="review-slide-header">
+                        <img src="download-avatars/Ирина Шишкина-1.jpg" alt="Ирина Шишкина" class="review-slide-avatar" onerror="this.style.display='none'">
+                        <div class="review-slide-info">
+                            <h4>Ирина Шишкина</h4>
+                            <p>Руководитель консалтинговой компании "Не просто идея"</p>
+                            <p style="font-size: 0.85rem; margin-top: 5px;">Май 2024</p>
+                        </div>
+                    </div>
+                    <div class="review-slide-text">
+                        Мне повезло быть на конференции и участником, и спикером, поэтому увидела и фронт, и бэкенд. От лица спикера хочу отметить работу программного комитета по предварительной работе со спикерами. Это очень сложная и кропотливая работа - ответственность на грани психолога и физика-ядерщика) Но коллеги точно справились - это и несколько прогонов перед мероприятием, и конструктивная обратная связь, и подсказки, которые помогли сделать очень крутой доклад. И именно поэтому я получила огромное удовольствие от конференции и как участник - было приятно послушать подготовленных коллег, поднимались важные темы для участников ИТ-индустрии. Хочу выразить отдельную благодарность организатором за место и атмосферу мероприятия - это был день, когда мы говорили о том, что любим, делали то, что умеем делать хорошо, были безумно красивы и слушали прекрасную музыку! Спасибо и очень надеюсь, до скорых встреч. Таких конференций нам очень не хватает сегодня!
+                    </div>
+                </div>
+                
+                <div class="review-slide">
+                    <div class="review-slide-header">
+                        <img src="download-avatars/Москаленко-1.jpg" alt="Андрей Москаленко" class="review-slide-avatar" onerror="this.style.display='none'">
+                        <div class="review-slide-info">
+                            <h4>Андрей Москаленко</h4>
+                            <p>Бизнес-аналитик в группе компаний Рексофт</p>
+                            <p style="font-size: 0.85rem; margin-top: 5px;">Март 2025</p>
+                        </div>
+                    </div>
+                    <div class="review-slide-text">
+                        Принимал участие в конференции Smart Speaker Conf в 2024 году. Организация очень сильно порадовала. Для проведения было выбрано очень красивое место с видом на Невский, которое в композиции с образами участников вызвало неподдельный восторг. Доклады были очень интересными, каждый достоин внимания. То, о чем рассказывали спикеры пригодится не только IT-специалистам, но и профессионалам, работающим (практически) в любых отраслях и желающим стать лучшими в своем деле. С удовольствием посещу конференцию и в 2025 году 🙂
+                    </div>
+                </div>
+                
+                <div class="review-slide">
+                    <div class="review-slide-header">
+                        <img src="download-avatars/Видрашко.png" alt="Евгения Видрашко" class="review-slide-avatar" onerror="this.style.display='none'">
+                        <div class="review-slide-info">
+                            <h4>Евгения Видрашко</h4>
+                            <p>Ведущий бизнес-аналитик в X5 Tech</p>
+                            <p style="font-size: 0.85rem; margin-top: 5px;">Февраль 2025</p>
+                        </div>
+                    </div>
+                    <div class="review-slide-text">
+                        В прошлом году я была спикером и со-организатором самой необычной IT конференции, созданной Натальей Семёновой! Смело могу сказать, что это мероприятие получилось очень камерным, но при этом максимально интересным и полезным. Обычно на конференциях мы мечемся от доклада к докладу, лавируя среди толп участников, пытаемся собрать себе интересную программу из непересекающихся докладов, а также стараемся поймать интересных спикеров и участников, чтобы пообщаться в кулуарах. Обычно на таких мероприятиях не все наши планы исполняются. На конференции Smart Speaker Conf как раз были учтены все текущие минусы больших мероприятий, но при этом продуманы все потребности как докладчиков, так и участников. И в итоге получился набор из крутых спикеров, с короткими докладами на самые актуальные темы.
+                    </div>
+                </div>
+                
+                <div class="review-slide">
+                    <div class="review-slide-header">
+                        <img src="download-avatars/Калинина 2.jpg" alt="Наталья Калинина" class="review-slide-avatar" onerror="this.style.display='none'">
+                        <div class="review-slide-info">
+                            <h4>Наталья Калинина</h4>
+                            <p>Практикующий биографический консультант</p>
+                            <p style="font-size: 0.85rem; margin-top: 5px;">Февраль 2025</p>
+                        </div>
+                    </div>
+                    <div class="review-slide-text">
+                        Наташа, как участник твоей конференции в качестве ведущего нетворкинга на тему «Изучение счастья в личной биографии, для знакомства со своими истинными ценностями и ресурсом» хочу поделиться тем, что: 1. Сама идея темы конференции «Soft skills для IT» кажется мне инновационной, так как становится очевидно что умные люди живут в голове, а навыки понимания себя и близких, соединения со своей индивидуальностью очень ценны. 2. Для меня было важно, как ты подбирала спикеров и темы выступлений, что тебе было важно озвучить такие темы и подходы, которые не звучали ещё нигде. Это похоже на поиски золотых слитков в огромном мире людей и возможностей. И надо заметить, все выступления и спикеры были настолько интересны и самобытны, что я осталась до конца чтобы послушать всех! 3. Сама организация и эстетика пространства, уровень на который ты всех нас позвала, был великолепен, пишу это как профессиональный витражист и любитель настоящей красоты и искусства. Музей, великолепная классическая музыка, угощения, пожелания по дресс коду, красота внешняя, которая создавала красоту внутренних переживаний и трансформаций. После конференции было прекрасное ощущение соприкосновения с настоящим, глубоким и важным.
+                    </div>
+                </div>
+                
+                <div class="review-slide">
+                    <div class="review-slide-header">
+                        <img src="download-avatars/ланге2.jpg" alt="Екатерина Ланге" class="review-slide-avatar" onerror="this.style.display='none'">
+                        <div class="review-slide-info">
+                            <h4>Екатерина Ланге</h4>
+                            <p>Head of start-up group IT-интегратора KT.Team</p>
+                            <p style="font-size: 0.85rem; margin-top: 5px;">Май 2024</p>
+                        </div>
+                    </div>
+                    <div class="review-slide-text">
+                        Наташа и команда организаторов, спасибо вам до Луны и обратно за потрясающе атмосферное мероприятие, где мы говорили про ИИ среди антикварных фотоснимков и ретро-камер, где с 9 утра подавали просеко и красную икру, где мы слушали Чайковского в исполнении пианиста из Мариинки. Спасибо за карьерные метрики, практику присвоения, шпаргалку по гормонам. За душевное общение и вечерние кораблики по Неве. Это было потрясающе. Забираю с большой благодарностью этот день в копилку впечатлений 💙
+                    </div>
+                </div>
+                
+                <div class="review-slide">
+                    <div class="review-slide-header">
+                        <img src="download-avatars/Ширанкова.jpg" alt="Галина Ширанкова" class="review-slide-avatar" onerror="this.style.display='none'">
+                        <div class="review-slide-info">
+                            <h4>Галина Ширанкова</h4>
+                            <p>Product Unit Lead, Avito</p>
+                            <p style="font-size: 0.85rem; margin-top: 5px;">Май 2024</p>
+                        </div>
+                    </div>
+                    <div class="review-slide-text">
+                        Наташа, спасибо тебе за возможность поучаствовать в конференции. Я получила не только приятные эмоции, но и новые смыслы. За рабочим процессом мы часто пропускаем выбор «в нужно ли это было тебе». Для меня эта конференция про осознанность. Локация и организация топ. И, конечно, подбор спикеров просто супер, даже не могу однозначно сказать, что понравилось больше — доклады или нетворк
+                    </div>
+                </div>
+            </div>
+            <div class="slider-dots" id="sliderDots"></div>
+        </div>
+    </section>
+
+    <!-- Photo Gallery -->
+    <section class="photo-gallery">
+        <div class="container">
+            <div class="photo-slider-wrapper">
+                <div class="photo-slider" id="photoSlider">
+                    <!-- Photo slides will be loaded here -->
+                </div>
+            </div>
+            <div class="photo-slider-dots" id="photoSliderDots"></div>
+        </div>
+    </section>
+
+    <!-- Speakers Section -->
+    <section class="speakers-section">
+        <div class="container">
+            <h2 class="section-title text-center">Спикеры конференции</h2>
+            <div class="speakers-intro">
+                <p>Наши спикеры - эксперты и лидеры IT, а также практикующие профессионалы, работающие с IT-специалистами на ежедневной основе. Это люди, достигшие успеха через решение часто нерешаемых задач. И они сделали это не единожды, сфомировали на основе своего опыта и опыта коллег методику и успешно применяют ее на практике!</p>
+                <p style="margin-top: 20px;">Пообщаться с такими людьми - всегда удача. Оказаться в компании 15 таких экспертов - мечта! Послушать их всех в течение одного дня на конференции Smart Speaker Conf - ваш шанс!</p>
+            </div>
+            <div class="speakers-grid" id="speakersGrid">
+                <!-- Speakers will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- SMART Format Section -->
+    <section class="conference-content" style="background: var(--bg-light);">
+        <div class="container">
+            <div class="conference-main">
+                <div class="conference-section">
+                    <h2 class="text-center">SMART Speaker Conf - Новый формат выступлений</h2>
+                    <div class="smart-format-grid">
+                        <div>
+                            <p style="font-size: 1.2rem; line-height: 2;">
+                                <strong>S Specific</strong> - Уникальные<br>
+                                <strong>M Motivating</strong> - Мотивирующие<br>
+                                <strong>A Applicable</strong> - Практически применимые<br>
+                                <strong>R Relevant</strong> - Актуальные<br>
+                                <strong>T Thorough</strong> - Глубокие
+                            </p>
+                        </div>
+                        <div>
+                            <ul style="font-size: 1.1rem; line-height: 2.5;">
+                                <li>Сочетание светского мероприятия и ИТ-конференции</li>
+                                <li>Доклады, интересные ИТ-экспертам любых ролей</li>
+                                <li>Камерная обстановка и <strong>нетворкинг</strong></li>
+                                <li><a href="#program"><strong>Смотреть программу →</strong></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Concept Blocks Section -->
+    <section class="concept-blocks-section">
+        <div class="container">
+            <div class="concept-blocks-grid">
+                <div class="concept-block">
+                    <img src="https://fs-thb02.getcourse.ru/fileservice/file/thumbnail/h/5c2dfad9e2e37cef0222568970f62a84.jpg/s/500x/a/603637/sc/202" alt="Пирамида зрелости" class="concept-block-image">
+                    <p class="concept-block-subtitle">Пирамида зрелости</p>
+                    <h3 class="concept-block-title">Фокус на лидерах</h3>
+                    <p class="concept-block-description">Для роста в эффективного лидера недостаточно хард- и софт-скиллов. Это критическая зона роста, где прежние методы обучения уже не работают. Неопределенность и непонимание правил игры - главный стоппер в развитии. Необходима смена майндсета</p>
+                </div>
+                <div class="concept-block">
+                    <img src="https://fs-thb03.getcourse.ru/fileservice/file/thumbnail/h/db21e19d13ad52bcf7d4399d48028568.jpg/s/500x/a/603637/sc/152" alt="Спиральная динамика" class="concept-block-image">
+                    <p class="concept-block-subtitle">Спиральная динамика</p>
+                    <h3 class="concept-block-title">Выход из достигаторства</h3>
+                    <p class="concept-block-description">Достиженческая культура выжимает рациональный максимум из каждого эксперта. Предел производительности светит выгоранием. Выйти из замкнутого круга можно только сменив парадигму мышления.</p>
+                </div>
+                <div class="concept-block">
+                    <img src="https://fs-thb02.getcourse.ru/fileservice/file/thumbnail/h/aaec150a8f185831a9e71ac757d24931.jpg/s/500x/a/603637/sc/142" alt="Cynefin framework" class="concept-block-image">
+                    <p class="concept-block-subtitle">Cynefin framework</p>
+                    <h3 class="concept-block-title">Зоны Complex / Complicated</h3>
+                    <p class="concept-block-description">Лучшие практики не работают в запутанных системах. Выигрывает тот, кто быстрее обнаруживает многообразие "неизвестных неизвестных", создает и адаптирует новые разносторонние подходы</p>
+                </div>
+                <div class="concept-block">
+                    <img src="https://fs-thb02.getcourse.ru/fileservice/file/thumbnail/h/582b6e966e9b2f6ed64145b1e5c5b7a5.jpg/s/500x/a/603637/sc/208" alt="Прокачивание лидеров" class="concept-block-image">
+                    <p class="concept-block-subtitle">Прокачивание лидеров</p>
+                    <h3 class="concept-block-title">Акселераторы роста</h3>
+                    <p class="concept-block-description">Для увеличения эффективности лидеры используют: Консалтинг - решение конкретных проблем. Коучинг - раскрытие своего потенциала. Менторинг - передача знаний. Практика - их усвоение. Все имеет свою цену ограничения. <strong>Объединяем все методы в одном мероприятии</strong></p>
+                </div>
+                <div class="concept-block">
+                    <img src="https://fs-thb02.getcourse.ru/fileservice/file/thumbnail/h/a37c0b00946a87366c562d991a011cce.jpg/s/500x/a/603637/sc/87" alt="Эффективность обучения" class="concept-block-image">
+                    <p class="concept-block-subtitle">Эффективность обучения</p>
+                    <h3 class="concept-block-title">Нетворкинг</h3>
+                    <p class="concept-block-description">Самый действенный и быстрый способ самообучения - это сочетание дискуссий, практики и обучения других. Одновременное применение возможно через правильно выстроенный нетворкинг: <strong>Общаемся с правильными людьми в удобное время на актуальные темы</strong></p>
+                </div>
+                <div class="concept-block">
+                    <img src="https://fs-thb02.getcourse.ru/fileservice/file/thumbnail/h/f45fa3b02b9a4b8d8e897621e93a06a8.jpg/s/500x/a/603637/sc/202" alt="Разнозносторонность" class="concept-block-image">
+                    <p class="concept-block-subtitle">Разнозносторонность</p>
+                    <h3 class="concept-block-title">Разнозносторонность</h3>
+                    <p class="concept-block-description">С ростом зрелости растет важность определения и реализации своих ценностей в контексте жизни, не только работы. Пора решать внутренние конфликтов достигаторов. Делаем это через всесторонний взгляд на жизнь, мышление и деятельность лидеров. <strong>Используем рациональные практики достижения целостности лидера</strong></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Program Section -->
+    <section class="program-section" id="program">
+        <div class="container">
+            <h2 class="section-title text-center">Программа конференции</h2>
+            <div id="programList">
+                <!-- Program cards will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer - Loaded dynamically via footer.js -->
+    <footer class="footer"></footer>
+
+    <script src="js/menu.js"></script>
+    <script src="js/page-header.js"></script>
+    <script src="js/footer.js"></script>
+    <script src="js/script.js"></script>
+    <script>
+        // Reviews Slider
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.review-slide');
+        const totalSlides = slides.length;
+        
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            if (n >= totalSlides) currentSlide = 0;
+            if (n < 0) currentSlide = totalSlides - 1;
+            slides[currentSlide].classList.add('active');
+            updateDots();
+        }
+        
+        function updateDots() {
+            const dots = document.querySelectorAll('.slider-dot');
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+        
+        // Create dots
+        const dotsContainer = document.getElementById('sliderDots');
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('button');
+            dot.className = 'slider-dot';
+            if (i === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => {
+                currentSlide = i;
+                showSlide(currentSlide);
+            });
+            dotsContainer.appendChild(dot);
+        }
+        
+        // Auto-advance slides every 5 seconds
+        setInterval(() => {
+            currentSlide++;
+            showSlide(currentSlide);
+        }, 5000);
+        
+        // Photo Gallery Slider
+        const photoUrls = [
+            'https://fs-thb01.getcourse.ru/fileservice/file/thumbnail/h/a6b4e42e58422635c554feb69e50b8f1.jpg/s/s1200x/a/603637/sc/152',
+            'https://fs-thb02.getcourse.ru/fileservice/file/thumbnail/h/0301bf608b0488357291ada8dc3cbcca.jpg/s/s1200x/a/603637/sc/223',
+            'https://fs-thb01.getcourse.ru/fileservice/file/thumbnail/h/b53ddd368afa301aef451baeab62713f.jpg/s/s1200x/a/603637/sc/365',
+            'https://fs-thb01.getcourse.ru/fileservice/file/thumbnail/h/46a7ba8ccb189353128f21d0637e7f22.jpg/s/s1200x/a/603637/sc/96',
+            'https://fs-thb01.getcourse.ru/fileservice/file/thumbnail/h/c3d01b231e65f54021b900c4b7f27519.jpg/s/s1200x/a/603637/sc/30',
+            'https://fs-thb03.getcourse.ru/fileservice/file/thumbnail/h/41e10900fa88e7689dc52b8965e32ebf.jpg/s/s1200x/a/603637/sc/161',
+            'https://fs-thb01.getcourse.ru/fileservice/file/thumbnail/h/3cd5ca75aa9127d29d910a8c0aa48dce.jpg/s/s1200x/a/603637/sc/327',
+            'https://fs-thb02.getcourse.ru/fileservice/file/thumbnail/h/6d88922c82aa971f57c16bd0fc7ce8f2.jpg/s/s1200x/a/603637/sc/257',
+            'https://fs-thb03.getcourse.ru/fileservice/file/thumbnail/h/c4fefc025016a5cfe26619848987540f.jpg/s/s1200x/a/603637/sc/112',
+            'https://fs-thb03.getcourse.ru/fileservice/file/thumbnail/h/883917e6492c14a447e53b3496becb16.jpg/s/s1200x/a/603637/sc/62',
+            'https://fs-thb01.getcourse.ru/fileservice/file/thumbnail/h/e755faa716fef94267a55c51a7fdd534.jpg/s/s1200x/a/603637/sc/255',
+            'https://fs-thb03.getcourse.ru/fileservice/file/thumbnail/h/1dbe4e6cde68f5fb1ee0c0c703b8c558.jpg/s/s1200x/a/603637/sc/386',
+            'https://fs-thb01.getcourse.ru/fileservice/file/thumbnail/h/4db69616f27363d316d236caae54c8d6.jpg/s/s1200x/a/603637/sc/150',
+            'https://fs-thb03.getcourse.ru/fileservice/file/thumbnail/h/4f365d71e103691798ce1ddb397ea2ef.jpg/s/s1200x/a/603637/sc/206',
+            'https://fs-thb02.getcourse.ru/fileservice/file/thumbnail/h/b948cfc6d65a3f68f749f2a30173cc33.jpg/s/s1200x/a/603637/sc/205',
+            'https://fs-thb03.getcourse.ru/fileservice/file/thumbnail/h/cde406a84da9e45ac9a9495ca097611a.jpg/s/s1200x/a/603637/sc/245',
+            'https://fs-thb02.getcourse.ru/fileservice/file/thumbnail/h/c44733dedae61ad1b4f56afa28b907e5.jpg/s/s1200x/a/603637/sc/333',
+            'https://fs-thb03.getcourse.ru/fileservice/file/thumbnail/h/0bedd8ad9443f69c2dcda08e3308e406.jpg/s/s1200x/a/603637/sc/288',
+            'https://fs-thb03.getcourse.ru/fileservice/file/thumbnail/h/09982d371792302b7b0c35a0faaef15b.jpg/s/s1200x/a/603637/sc/132',
+            'https://fs-thb01.getcourse.ru/fileservice/file/thumbnail/h/36d5f5835c6ad04a4d4942f5bdd46ad3.jpg/s/s1200x/a/603637/sc/242',
+            'https://fs-thb03.getcourse.ru/fileservice/file/thumbnail/h/fd494ea202b7125aa250ba0a0c50d2a0.jpg/s/s1200x/a/603637/sc/194',
+            'https://fs-thb03.getcourse.ru/fileservice/file/thumbnail/h/33db5dec92250a3c574fa28724804b6a.jpg/s/s1200x/a/603637/sc/137',
+            'https://fs-thb02.getcourse.ru/fileservice/file/thumbnail/h/a655400831c0b55241de89e2a32df9c6.jpg/s/s1200x/a/603637/sc/90',
+            'https://fs-thb02.getcourse.ru/fileservice/file/thumbnail/h/f7ffe40c095fae56cf792ecf27985a93.jpg/s/s1200x/a/603637/sc/319',
+            'https://fs-thb01.getcourse.ru/fileservice/file/thumbnail/h/78d70343283325c7985eb0a5750aed93.jpg/s/s1200x/a/603637/sc/10',
+            'https://fs-thb02.getcourse.ru/fileservice/file/thumbnail/h/f0d2c5f2e507881659af6304e83128c3.jpg/s/s1200x/a/603637/sc/55',
+            'https://fs-thb03.getcourse.ru/fileservice/file/thumbnail/h/3bdffad8b475d3fd44cd5a7fd7b30fb3.jpg/s/s1200x/a/603637/sc/482',
+            'https://fs-thb02.getcourse.ru/fileservice/file/thumbnail/h/bc5493a5da4f98bb9acaf6a1be5abb60.jpg/s/s1200x/a/603637/sc/471',
+            'https://fs-thb03.getcourse.ru/fileservice/file/thumbnail/h/f5e769d2f78d4919a787b466cf155746.jpg/s/s1200x/a/603637/sc/90',
+            'https://fs-thb01.getcourse.ru/fileservice/file/thumbnail/h/5053d28aa49638da4f5d0a7e4c38496c.jpg/s/s1200x/a/603637/sc/152',
+            'https://fs-thb02.getcourse.ru/fileservice/file/thumbnail/h/157f54b021f39ea551586f7ffbcdb3a7.jpg/s/s1200x/a/603637/sc/246',
+            'https://fs-thb03.getcourse.ru/fileservice/file/thumbnail/h/fe4e230f5879170b0c1a1c3b7118450c.jpg/s/s1200x/a/603637/sc/81'
+        ];
+        
+        let currentPhoto = 0;
+        const photoSlider = document.getElementById('photoSlider');
+        const photoSliderDots = document.getElementById('photoSliderDots');
+        
+        // Create photo slides
+        photoUrls.forEach((url, index) => {
+            const slide = document.createElement('div');
+            slide.className = 'photo-slide';
+            slide.innerHTML = `<img src="${url}" alt="Фото конференции Smart Speaker Conf ${index + 1}" loading="lazy">`;
+            photoSlider.appendChild(slide);
+            
+            // Create dot
+            const dot = document.createElement('button');
+            dot.className = 'photo-slider-dot';
+            if (index === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => {
+                currentPhoto = index;
+                showPhoto(currentPhoto);
+            });
+            photoSliderDots.appendChild(dot);
+        });
+        
+        function showPhoto(n) {
+            const dots = document.querySelectorAll('.photo-slider-dot');
+            
+            if (n >= photoUrls.length) {
+                currentPhoto = 0;
+                n = 0;
+            }
+            if (n < 0) {
+                currentPhoto = photoUrls.length - 1;
+                n = photoUrls.length - 1;
+            }
+            
+            currentPhoto = n;
+            
+            // Move slider
+            photoSlider.style.transform = `translateX(-${currentPhoto * 100}%)`;
+            
+            // Update dots
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentPhoto);
+            });
+        }
+        
+        // Auto-advance photos every 5 seconds
+        setInterval(() => {
+            currentPhoto++;
+            if (currentPhoto >= photoUrls.length) {
+                currentPhoto = 0;
+            }
+            showPhoto(currentPhoto);
+        }, 5000);
+        
+        // Program Data
+        const programData = [
+            {
+                name: "Наталья Семенова",
+                bio: [
+                    "Руководитель группы анализа в компании НОТА (Т1). До этого - ведущий бизнес-аналитик и ресурсный менеджер в Epam Systems",
+                    "Вдохновитель и руководитель проекта Smart-Effect",
+                    "Постоянный спикер и куратор IT-конференций",
+                    "Автор курсов подготовки к выступлениям на IT-конференциях",
+                    "Организатор конференции Smart Speaker Conf"
+                ],
+                topic: "Увеличьте в 100 крат свое влияние на IT в России",
+                description: "После ухода западных компаний стало очевидно, насколько мы были зависимы от западных технологий, и насколько наши практики IT не справляются с современными вызовами. По различным оценкам, наше отставание в сфере IT - от 10 до 15 лет. Те, кто остались в стране - конечно, хотели бы вернуться к прежнему уровню зрелости. Для быстрого развития нужны эффективные правильные решения основанные на реальной опытной экспертности. Иначе мы рискуем делать НЕ ТО и НЕ ТАК. Мы с вами - оставшиеся в России эксперты - можем распространять экспертизу на всех уровнях, чтоб усилить экспертно-практический потенциал страны. Трудясь над одним из продуктов - мы решаем определенный спектр задач. Распространяя лучшие практики через выступления на конференции - мы помогает сотням людей, развивающим IT в России. Если вы эксперт - становитесь спикером! Пересмотрите свои возможности влияния на технологическую ситуацию в стране. Приходите на доклад, получите свою дозу мотивации. Вам будем, о чем подумать.",
+                photo: "https://fs-thb03.getcourse.ru/fileservice/file/thumbnail/h/9c46f4c3b3cc234c0c1d519dea8fab58.png/s/500x/a/603637/sc/332",
+                presentation: "download-ssc/Семенова - Smart Speaker Conf.pdf",
+                youtube: "https://www.youtube.com/playlist?list=PL_7ax0Vi3x1zknkyp2dYQ9h4hiprI70-y",
+                rutube: "https://rutube.ru/plst/609017/",
+                vk: "https://vkvideo.ru/playlist/-227783083_1"
+            },
+            {
+                name: "Дмитрий Безуглый",
+                bio: [
+                    "Инженер системотехник, эксперт-методолог в области процессов разработки и современного управления продуктовыми и цифровыми компаниями",
+                    "Обладая более 10-летним опытом работы с ведущими компаниями в сфере технологий по развитию продуктового подхода",
+                    "Как сертифицированный командный коуч и фасилитатор, Дмитрий помогает организациям управлять результатами с помощью форсайт технологий"
+                ],
+                topic: "За пределами EQ и IQ - трансформация лидерства и управления",
+                description: "В мире, где цифровая трансформация переписывает правила игры, традиционные модели лидерства теряют свою силу. Многие из нас сталкиваются с дилеммой выбора между техническим гением без эмпатии и чрезмерно добродетельным руководителем, который живет в мире магического мышления. Этот разрыв между \"интеллектом без сердца\" и \"сердцем без интеллекта\" порождает неэффективные команды и среды и откровенно плохие продукты, в которых никто не хочет работать. Но что, если существует путь, который объединяет лучшее из обоих миров? Путь, который приводит к созданию сильных, умных и, одновременно, отзывчивых лидеров? В моем формате доклада мы разберёмся, как адекватному руководителю в ИТ преодолеть устаревшие стереотипы и создать культуру, где инновации и человечность идут рука об руку.",
+                photo: "download-avatars/Дима Безуглый.jpg",
+                presentation: "download-ssc/Безуглый.pdf",
+                youtube: "https://www.youtube.com/playlist?list=PL_7ax0Vi3x1zknkyp2dYQ9h4hiprI70-y",
+                rutube: "https://rutube.ru/plst/609017/",
+                vk: "https://vkvideo.ru/playlist/-227783083_1"
+            },
+            {
+                name: "Анастасия Левина",
+                bio: [
+                    "Кандидат наук, коуч МСС ICF, мастер коуч ФПКиН, ментор для коучей",
+                    "Преподаватель и руководитель института менторов и супервизоров в Академии «5 Prism»",
+                    "Глава комитета по сертификации в Федерации профессиональных коучей и наставников"
+                ],
+                topic: "Выгорание и работа на высоком стрессе. Как справляться?",
+                description: "В декабре 2023 года у 96% из 2000 IT-специалистов, опрошенных «Хабр карьерой» совместно с HR-платформой Beehive, зафиксированы признаки выгорания, причем 44% находятся на его поздней и самой опасной стадии. Только 21% опрошенных говорят о том, что они страдают, но держатся. Тему своего выступления я выбирала не одна. Собрав весь свой личный опыт, опыт своих коллег, IT-клиентов в коучинге мы единогласно пришли к тому, что выгорание и работа на высоком уровне стресса - это одна из ключевых проблем специалистов этой области. Так почему же когда-то нам хватает ресурса выдерживать срочные дедлайны и бесконечно летящие в нас задачи, а когда-то - нет. От чего зависит этот самый ресурс и как им управлять - ключевая тема моего выступления.",
+                photo: "download-avatars/Левина.jpg",
+                presentation: "download-ssc/Левина.pdf",
+                youtube: "https://www.youtube.com/playlist?list=PL_7ax0Vi3x1zknkyp2dYQ9h4hiprI70-y",
+                rutube: "https://rutube.ru/plst/609017/",
+                vk: "https://vkvideo.ru/playlist/-227783083_1"
+            },
+            {
+                name: "Галина Ширанкова",
+                bio: [
+                    "Product Unit Lead, Avito",
+                    "Ex-VK, MTS, T1, LANIT",
+                    "Запускает продукты, руководит людьми, развивает команду, ведет канал Полтора Продакта о кейсах в работе в ИТ"
+                ],
+                topic: "Компания на вырост: куда идти, чтобы сделать карьеру мечты",
+                description: "Что такое успешная карьера и как ее измерить? Можем ли мы однозначно сказать, СРО успешнее миддл продакт менеджера или CTO успешнее тестировщика? Конечно, нет, потому что у каждого из них есть свои карьерные цели и мы не знаем, насколько они их достигли. Мир многообразен и нет единого мерила успешности. Нужно понимать себя и то, что хочешь именно ты. В гонке за классическим ростом из джуна в миддла и далее по списку мы часто забываем именно о том, что хотели этим достичь. В докладе рассмотрим рост в ИТ от целей и пути, которыми лучше идти к намеченному через выбор подходящих компаний и продуктов.",
+                photo: "download-avatars/Ширанкова.jpg",
+                presentation: "download-ssc/Ширанкова.pdf",
+                youtube: "https://www.youtube.com/playlist?list=PL_7ax0Vi3x1zknkyp2dYQ9h4hiprI70-y",
+                rutube: "https://rutube.ru/plst/609017/",
+                vk: "https://vkvideo.ru/playlist/-227783083_1"
+            },
+            {
+                name: "Андрей Москаленко",
+                bio: [
+                    "Бизнес-аналитик в группе компаний Рексофт",
+                    "Преподаватель в Воронежском Государственном Университете на Факультете Компьютерных наук",
+                    "Амбассадор использования генеративных нейронных сетей в части выполнения профессиональных, в т.ч. аналитических задач"
+                ],
+                topic: "Как специалисту не стать жертвой искусственного интеллекта",
+                description: "Даже самый высококлассный специалист иногда задумывается о том, действительно ли он настолько необходим и востребован? А новости о развитии Искусственного интеллекта могут натолкнуть на мысль о том, что не такой уж специалист и незаменимый... Скорость развития технологий в области Искусственного Интеллекта действительно начинает пугать. Как же стоит действовать в современных реалиях, чтобы оставаться наплаву и не очнуться в мире, где твою работу полностью выполняет машина? Рассмотрим в рамках этого доклада.",
+                photo: "download-avatars/Москаленко-1.jpg",
+                presentation: "download-ssc/Москаленко.pdf",
+                youtube: "https://www.youtube.com/playlist?list=PL_7ax0Vi3x1zknkyp2dYQ9h4hiprI70-y",
+                rutube: "https://rutube.ru/plst/609017/",
+                vk: "https://vkvideo.ru/playlist/-227783083_1"
+            },
+            {
+                name: "Екатерина Ланге",
+                bio: [
+                    "Head of start-up group IT-интегратора KT.Team",
+                    "14 запущенных с нуля бизнес-проектов, 12 из них на данный момент продолжают успешно работать",
+                    "Agile-практик в работе и личной жизни"
+                ],
+                topic: "Люди-сервисы: как высвободить себе, коллегам, и членам семьи до 5 часов в неделю и при этом остаться \"в курсе\"",
+                description: "Любите ли вы регулярные созвоны? О, эти прекрасные моменты, когда количество участников больше, чем количество смыслов, когда повестка туманна, а результаты слабо зафиксированы. И чувствуешь бессилие. И болото созвонов тебя медленно, но верно поглощает. Я расскажу, как айтишный принцип слабой связанности мы раскатали на корпоративное, кросс-командное и межличностное общение. Как в разы сократили запросы на синхроны, построили прозрачные коммуникации и получили еще пару непрогнозируемых бонусов в процессе.",
+                photo: "download-avatars/ланге2.jpg",
+                presentation: "download-ssc/Ланге.pdf",
+                youtube: "https://www.youtube.com/playlist?list=PL_7ax0Vi3x1zknkyp2dYQ9h4hiprI70-y",
+                rutube: "https://rutube.ru/plst/609017/",
+                vk: "https://vkvideo.ru/playlist/-227783083_1"
+            },
+            {
+                name: "Михаил Вишневский",
+                bio: [
+                    "Менеджер в IT с 2006 года",
+                    "Лидер функции бизнес-анализа в крупнейшем ритейлере России"
+                ],
+                topic: "Тандем, как новая форма управления, или когда 1+1>2",
+                description: "Предположим, вам досталось крупное подразделение или ваш отдел вырос в 4-5 раз после реструктуризации. И у вас больше не получается управлять командой на том же уровне, что и раньше. Изменения не случаются, методологии не работают, все гипотезы по улучшению проваливаются. У нас есть необычный способ, как выбраться из такой ситуации. Расскажем, как мы попробовали парный менеджмент и что из этого вышло. Порассуждаем на тему, почему может получиться или нет и стоит ли пробовать. Спойлер. Да, стоит.",
+                photo: "download-avatars/Михаил Вишневский.png",
+                presentation: "download-ssc/Вишневский.pdf",
+                youtube: "https://www.youtube.com/playlist?list=PL_7ax0Vi3x1zknkyp2dYQ9h4hiprI70-y",
+                rutube: "https://rutube.ru/plst/609017/",
+                vk: "https://vkvideo.ru/playlist/-227783083_1"
+            },
+            {
+                name: "Ирина Леонтьева",
+                bio: [
+                    "Старший руководитель проектов, Газпромнефть - Цифровые решения",
+                    "Преподаватель, Университет ИТМО",
+                    "Автор и лектор курсов по менеджменту в ИТ-проектах и инновационному менеджменту, аспирант"
+                ],
+                topic: "Как научиться смотреть шире своих «могу» и не бояться делать свои «хочу»",
+                description: "Вы чувствуете, что достигли потолка своих возможностей, по-старому уже не хочется, а по-новому страшно и непонятно? Замкнулись в профессиональной сфере, боитесь пробовать что-то новое, а постановка значимых целей вызывает у Вас трепет? Знакомая для многих ситуация. Мы часто сами возводим себе невидимый стеклянный потолок, пробить которой как будто бы нельзя. А что, если я скажу Вам, что пробить потолок можно и нужно? И что Вы можете сделать это самостоятельно, лишь немного расширив границы мышления и проявив смелость, независимо от того уровня, на котором Вы сейчас находитесь: будь Вы начинающим специалистом, или руководителем.",
+                photo: "download-avatars/Леонтьева.jpg",
+                presentation: "download-ssc/Леонтьева.pdf",
+                youtube: "https://www.youtube.com/playlist?list=PL_7ax0Vi3x1zknkyp2dYQ9h4hiprI70-y",
+                rutube: "https://rutube.ru/plst/609017/",
+                vk: "https://vkvideo.ru/playlist/-227783083_1"
+            },
+            {
+                name: "Павел Варламов",
+                bio: [
+                    "Практик бирюзовых продаж. Двигатель прогресса в экосистеме «Энергия жизни»",
+                    "Product manager в ИТ startup \"Anavi\" и «Обнимашки»",
+                    "Активно развивает модель самоуправления, фасилитируя управленческие встречи по принятию стратегических решений в компании"
+                ],
+                topic: "Результативные встречи с принятием стратегических решений за 30 мин. Реальность или фантазия?",
+                description: "Как быстро и эффективно принимаются решения в вашей компании? Скорость реакции на возникшее напряжение в команде влияет на креативность сотрудников и финансовые показатели компании. Мое имя Павел Варламов, я член экосистемы «Энергия Жизни» и мы нашли для себя метод отвечающий принципам сотрудничества и позволяющий эффективно управлять процессом встречи. Он помогает управлять обсуждениями без споров и обид. С помощью него мы можем продуктивно выбрать, например, новый фреймворк или сменить scrum на kanban, выбрать стратегию развития или принять решение по дизайну. На примере поделюсь как проходит процедура в нашей компании и как нам удается извлечь мудрость каждого участника без потери ценного ресурса - времени.",
+                photo: "https://fs-thb03.getcourse.ru/fileservice/file/thumbnail/h/55f900c6c87751ea2252ad4f454adabf.jpg/s/500x/a/603637/sc/236",
+                presentation: "download-ssc/Варламов.pdf",
+                youtube: "https://www.youtube.com/playlist?list=PL_7ax0Vi3x1zknkyp2dYQ9h4hiprI70-y",
+                rutube: "https://rutube.ru/plst/609017/",
+                vk: "https://vkvideo.ru/playlist/-227783083_1"
+            },
+            {
+                name: "Евгения Видрашко",
+                bio: [
+                    "Ведущий бизнес-аналитик в X5 Tech",
+                    "Опыт работы как в заказной, так и продуктовой разработке для российских и зарубежных компаний"
+                ],
+                topic: "Как в погоне за развитием не потерять фокус и смысл",
+                description: "Задумывались ли вы, что влияет на ваш трек развития? Часто ли ваше развитие определяют только внешние факторы, а вы при этом подчиняетесь требованиям и не слышите свои желания? Кажется ли вам, что вы не управляете своим развитием: делаете больше, а ваша эффективность падает и кажется, что вы зашли в тупик? В рамках доклада обсудим: с какими вызовами в карьере мы сейчас сталкиваемся, и все ли их стоит принимать, как начать управлять своим развитием самостоятельно и на чем нужно держать фокус. А также посмотрим на примерах, как, понимая цель своего развития, можно повысить уровень эффективности всей команды.",
+                photo: "download-avatars/Видрашко.png",
+                presentation: "download-ssc/Видрашко.pdf",
+                youtube: "https://www.youtube.com/playlist?list=PL_7ax0Vi3x1zknkyp2dYQ9h4hiprI70-y",
+                rutube: "https://rutube.ru/plst/609017/",
+                vk: "https://vkvideo.ru/playlist/-227783083_1"
+            },
+            {
+                name: "Максим Чернухин",
+                bio: [
+                    "Консультант по технологиям, CTO advisor",
+                    "СТО в «Сбербанк страхование жизни»",
+                    "В прошлом работал в «Альфа-Банк» и «Сбертехе» на ключевых проектах. 10+ лет в IT"
+                ],
+                topic: "Наука успеха. Как мозг и гормоны формируют мотивацию команды",
+                description: "Возможно, вам встречались команды, которые работали вместе, но при этом им не хватало драйва, сплоченности или вовлеченности. Они вроде выполняют свою работу, но при этом это не то место, куда хочется идти покорять новые высоты и бросать вызовы в понедельник. Возможно, вы даже работали когда-то в такой, я точно да… Но оказывается это можно поменять. Ответ лежит в понимании того, как работает наш мозг. Если грамотно подойти к уровню необходимых гормонов, то можно прийти к тому, что вы будете счастливы от того, что делаете. Внедрив это в одной из компаний удалось увеличить eNPS на 20% и я с вами этим поделюсь!",
+                photo: "download-avatars/Максим Чернухин.jpg",
+                presentation: "download-ssc/Чернухин.pdf",
+                youtube: "https://www.youtube.com/playlist?list=PL_7ax0Vi3x1zknkyp2dYQ9h4hiprI70-y",
+                rutube: "https://rutube.ru/plst/609017/",
+                vk: "https://vkvideo.ru/playlist/-227783083_1"
+            },
+            {
+                name: "Алексей Северов",
+                bio: [
+                    "Эксперт в области IT-лидерства и стратегического управления"
+                ],
+                topic: "Мировоззрение и роль лидера ИТ в условиях нестабильной среды",
+                description: "Вот уже больше года мировые и российский И-рынки буквально трясет от новостей. Выстрелившее новое поколение ИИ (генеративный ИИ, гИИ) буквально перевернул правила игры: на фоне восторгов новых возможностей постоянно идут апокалиптические новости и прогнозы о поголовной ненужности ИТ-специалистов. Первыми под удар попали масс-позиции (поддержка и администраторы), затем начались анонсы проблем разработчиков и аналитиков, впереди – мысли о полностью «безлюдных» предприятиях и процессах. В условиях перманентного землетрясения, накладывающегося в нашей стране на старые, нерешенные проблемы (нехватка квалифицированных специалистов, импортозамещение и пр.), лидеры ИТ-команд находятся «между Сциллой и Харибдой»: собственные риски, острые вопросы специалистов команды о том, каковы их перспективы, запросы руководства о том, возможно ли оптимизация с использованием ИИ – все это способно буквально свести с ума лидера.",
+                photo: "download-avatars/Северов1.jpg",
+                presentation: "download-ssc/Северов.pdf",
+                youtube: "https://www.youtube.com/playlist?list=PL_7ax0Vi3x1zknkyp2dYQ9h4hiprI70-y",
+                rutube: "https://rutube.ru/plst/609017/",
+                vk: "https://vkvideo.ru/playlist/-227783083_1"
+            },
+            {
+                name: "Дарья Мулык",
+                bio: [
+                    "Менеджер по обучению и развитию сотрудников в IT компании Sibedge",
+                    "Карьерный консультант/коуч по вопросам персонального роста и развития команды для управленцев",
+                    "Разработчик и тренер образовательных программ под ключ"
+                ],
+                topic: "Как научиться присваивать результаты себе за общее дело",
+                description: "Управляешь командой, но получаешь вопросы \"а в чем вообще твоя роль и зачем ты нужен\"? И ты уже устал на них отвечать. Трудно принять, что результаты команды, это и твои результаты? Не понимаешь, как оценить и присвоить свои достижения и подтвердить значимость своей роли? Если на один из вопросов ты ответил \"да\", то предлагаю освоить навык присвоения результатов своего труда. Я 4 года проработала в IT и эта тема популярна для большинства менеджеров. И для этого есть решение. Я поделюсь с тобой инструментами, которые покажут твои заслуги, сделают их видимым и для твоего подсознания и для коллег.",
+                photo: "download-avatars/Дарья Мулык.png",
+                presentation: "download-ssc/Мулык.pdf",
+                youtube: "https://www.youtube.com/playlist?list=PL_7ax0Vi3x1zknkyp2dYQ9h4hiprI70-y",
+                rutube: "https://rutube.ru/plst/609017/",
+                vk: "https://vkvideo.ru/playlist/-227783083_1"
+            },
+            {
+                name: "Ирина Шишкина",
+                bio: [
+                    "Руководитель консалтинговой компании \"Не просто идея\"(внедрение проектного управления, автоматизация процессов) с 2014",
+                    "Руководитель международных проектов с 2007 года",
+                    "Руководитель портфелей проектов. Журналист, писатель, практикующий психолог. Executive coach с 2016"
+                ],
+                topic: "Инструменты проектного управления в организации жизни",
+                description: "Как давно вы в профессии? Много знаете и умеете? Уверена, что да, и управлять проектом для вас как два пальца... А что с остальными сферами жизни? Личная жизнь, семья, хобби, друзья, здоровье, эмоциональное состояние? Поговорим о том, как принципы линейного и нелинейного управления могут помочь сделать свою жизнь сбалансированной и целостной.",
+                photo: "download-avatars/Ирина Шишкина-1.jpg",
+                presentation: "download-ssc/Шишкина.pdf",
+                youtube: "https://www.youtube.com/playlist?list=PL_7ax0Vi3x1zknkyp2dYQ9h4hiprI70-y",
+                rutube: "https://rutube.ru/plst/609017/",
+                vk: "https://vkvideo.ru/playlist/-227783083_1"
+            },
+            {
+                name: "Наталья Калинина",
+                bio: [
+                    "Практикующий биографический консультант (института Биографического консультирования)",
+                    "Изучает закономерности развития биографий современников и известных личностей"
+                ],
+                topic: "В личное счастье за ценностями, ресурсом и пониманием себя",
+                description: "Доклад о том, как через изучение своей биографии можно найти свои истинные ценности и ресурсы для достижения личного счастья.",
+                photo: "download-avatars/Калинина 2.jpg",
+                presentation: null,
+                youtube: "https://www.youtube.com/playlist?list=PL_7ax0Vi3x1zknkyp2dYQ9h4hiprI70-y",
+                rutube: "https://rutube.ru/plst/609017/",
+                vk: "https://vkvideo.ru/playlist/-227783083_1"
+            }
+        ];
+        
+        // Render program
+        const programList = document.getElementById('programList');
+        programData.forEach((talk, index) => {
+            const card = document.createElement('div');
+            card.className = 'program-card';
+            const talkId = `talk-${index}`;
+            card.id = talkId;
+            card.innerHTML = `
+                <div class="program-card-header">
+                    <img src="${talk.photo}" alt="${talk.name}" class="program-speaker-photo" onerror="this.src='images/placeholder.jpg'">
+                    <div class="program-speaker-info">
+                        <h3 class="program-speaker-name">${talk.name}</h3>
+                        <div class="program-speaker-bio">
+                            <ul>
+                                ${talk.bio.map(item => `<li>${item}</li>`).join('')}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <h3 class="program-topic">${talk.topic}</h3>
+                <div class="program-description">
+                    ${talk.description}
+                </div>
+                <div class="program-links">
+                    ${talk.youtube ? `<a href="${talk.youtube}" target="_blank">YouTube</a>` : ''}
+                    ${talk.youtube && talk.rutube ? `<span>|</span>` : ''}
+                    ${talk.rutube ? `<a href="${talk.rutube}" target="_blank">RuTube</a>` : ''}
+                    ${(talk.youtube || talk.rutube) && talk.vk ? `<span>|</span>` : ''}
+                    ${talk.vk ? `<a href="${talk.vk}" target="_blank">VK</a>` : ''}
+                    ${(talk.youtube || talk.rutube || talk.vk) && talk.presentation ? `<span>|</span>` : ''}
+                    ${talk.presentation ? `<a href="${talk.presentation}" target="_blank">PDF</a>` : ''}
+                </div>
+            `;
+            programList.appendChild(card);
+            
+            // Store talk ID for speaker links
+            talk.talkId = talkId;
+        });
+        
+        // Speakers Data - use same data as programData for consistency
+        const speakers = programData.map(talk => ({
+            name: talk.name,
+            topic: talk.topic,
+            photo: talk.photo,
+            talkId: talk.talkId
+        }));
+        
+        // Render speakers
+        const speakersGrid = document.getElementById('speakersGrid');
+        speakers.forEach((speaker) => {
+            const card = document.createElement('div');
+            card.className = 'speaker-card';
+            
+            card.innerHTML = `
+                <a href="#${speaker.talkId}" style="text-decoration: none; color: inherit;">
+                    <img src="${speaker.photo}" alt="${speaker.name}" class="speaker-photo" onerror="this.src='images/placeholder.jpg'">
+                    <h3 class="speaker-name">${speaker.name}</h3>
+                    <p class="speaker-topic">${speaker.topic}</p>
+                </a>
+            `;
+            speakersGrid.appendChild(card);
+        });
+    </script>
+</body>
+</html>
